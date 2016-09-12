@@ -9,14 +9,16 @@ import android.widget.SimpleAdapter;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     private ListView showList;
     private EditText inputEdit;
-    private LinkedList<HashMap<String,String>> linkedList = new LinkedList<>();
-    private String []from = {"title","content"};
-    private int []to = {R.id.item_title,R.id.item_content};
+    private LinkedList<HashMap<String,Object>> linkedList = new LinkedList<>();
+    private String []from = {"title","content","img"};
+    private int []to = {R.id.item_title,R.id.item_content,R.id.showImg};
     private SimpleAdapter adapter;
+    private int[] img = {R.drawable.fruit1,R.drawable.fruit2,R.drawable.fruit3,R.drawable.fruit4,R.drawable.fruit5,R.drawable.fruit6,R.drawable.fruit7};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,9 +62,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void insert(View v) {
         //String input = inputEdit.getText().toString();
-        HashMap<String,String> data = new HashMap<>();
+        HashMap<String,Object> data = new HashMap<>();
         data.put(from[0],inputEdit.getText().toString());
         data.put(from[1],"Good~~~~~~1!!");
+        data.put(from[2],img[(int)(Math.random()*7)]);
         linkedList.add(data);
         adapter.notifyDataSetChanged();
     }
