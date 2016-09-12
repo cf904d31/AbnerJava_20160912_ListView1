@@ -2,6 +2,8 @@ package iii.org.tw.listviewtest1;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -10,18 +12,26 @@ import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity {
     private ListView showList;
+    private EditText inputEdit;
+    private LinkedList<HashMap<String,String>> linkedList = new LinkedList<>();
+    private String []from = {"title","content"};
+    private int []to = {R.id.item_title,R.id.item_content};
+    private SimpleAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         showList = (ListView) findViewById(R.id.showList);
+        inputEdit = (EditText) findViewById(R.id.inputEdit);
+
         intitListView();
     }
 
     private void intitListView() {
-        LinkedList<HashMap<String,String>> linkedList = new LinkedList<>();
 
+        linkedList = new LinkedList<>();
+        /*
         HashMap<String,String> data0 = new HashMap<>();
         data0.put("title","Abner");
         data0.put("content","good~~~~~~~~");
@@ -41,10 +51,19 @@ public class MainActivity extends AppCompatActivity {
         data3.put("title","Link Park");
         data3.put("content","good~~~~~~~~");
         linkedList.add(data3);
+        */
 
-        String []from = {"title","content"};
-        int []to = {R.id.item_title,R.id.item_content};
-        SimpleAdapter adapter = new SimpleAdapter(this ,linkedList ,R.layout.layout_item ,from ,to);
+
+        adapter = new SimpleAdapter(this ,linkedList ,R.layout.layout_item ,from ,to);
         showList.setAdapter(adapter);
+    }
+
+    public void insert(View v) {
+        //String input = inputEdit.getText().toString();
+        HashMap<String,String> data = new HashMap<>();
+        data.put(from[0],inputEdit.getText().toString());
+        data.put(from[1],"Good~~~~~~1!!");
+        linkedList.add(data);
+        adapter.notifyDataSetChanged();
     }
 }
