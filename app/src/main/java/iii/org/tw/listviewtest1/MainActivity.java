@@ -2,10 +2,13 @@ package iii.org.tw.listviewtest1;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -58,6 +61,31 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new SimpleAdapter(this ,linkedList ,R.layout.layout_item ,from ,to);
         showList.setAdapter(adapter);
+
+//        showList.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d("Abner","OnClick");
+//            }
+//        });
+
+        showList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("Abner","i = " + position);
+                Toast.makeText(MainActivity.this,"OK",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"title=",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        showList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("Abner","i = " + position + "->Long");
+                Toast.makeText(MainActivity.this,"Long OK",Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
     }
 
     public void insert(View v) {
