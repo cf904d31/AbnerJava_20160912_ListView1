@@ -72,9 +72,9 @@ public class MainActivity extends AppCompatActivity {
         showList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("Abner","i = " + position);
-                Toast.makeText(MainActivity.this,"OK",Toast.LENGTH_SHORT).show();
-                Toast.makeText(MainActivity.this,"title=",Toast.LENGTH_SHORT).show();
+                Log.d("Abner","i = " + id);
+                //Toast.makeText(MainActivity.this,"OK",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"title=" + linkedList.get(position).get("title"),Toast.LENGTH_SHORT).show();
             }
         });
 
